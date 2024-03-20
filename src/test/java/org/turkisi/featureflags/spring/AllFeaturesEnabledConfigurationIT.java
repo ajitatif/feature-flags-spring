@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.turkisi.featureflags.spring.auction.AuctionIgnitionFailException;
-import org.turkisi.featureflags.spring.auction.RemarketingAuctionIgnitionFeatureDelegate;
+import org.turkisi.featureflags.spring.auction.RemarketingAuctionIgnitionFeature;
 import org.turkisi.featureflags.spring.auction.rerun.limit.CarAuctionRerunLimitExhaustedException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AllFeaturesEnabledConfigurationIT {
 
     @Autowired
-    private RemarketingAuctionIgnitionFeatureDelegate remarketingAuctionIgnitionFeature;
+    private RemarketingAuctionIgnitionFeature remarketingAuctionIgnitionFeature;
 
     @Test
     void shouldCheckoutAndRerunWhenCarIsNew() throws AuctionIgnitionFailException {

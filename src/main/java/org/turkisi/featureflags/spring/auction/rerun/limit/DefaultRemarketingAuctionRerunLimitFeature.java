@@ -1,23 +1,18 @@
 package org.turkisi.featureflags.spring.auction.rerun.limit;
 
 import jakarta.annotation.Nonnull;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import org.turkisi.featureflags.spring.common.ConfigurableFeature;
-import org.turkisi.featureflags.spring.common.FeatureConfiguration;
 import org.turkisi.featureflags.spring.domain.CarLead;
 
-@Component("defaultAuctionRerunLimitFeature")
-class DefaultRemarketingAuctionRerunLimitFeature implements RemarketingAuctionRerunLimitFeature, ConfigurableFeature {
+@Component
+@ConditionalOnProperty(value = "org.turkisi.features.auction.rerun.rerun-limit.delegate", havingValue = "default")
+class DefaultRemarketingAuctionRerunLimitFeature implements RemarketingAuctionRerunLimitFeature {
 
     private final RemarketingAuctionRerunLimitFeatureConfiguration configuration;
 
     public DefaultRemarketingAuctionRerunLimitFeature(RemarketingAuctionRerunLimitFeatureConfiguration configuration) {
         this.configuration = configuration;
-    }
-
-    @Override
-    public FeatureConfiguration getConfiguration() {
-        return configuration;
     }
 
     @Override

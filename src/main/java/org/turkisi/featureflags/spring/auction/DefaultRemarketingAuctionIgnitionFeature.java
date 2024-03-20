@@ -1,33 +1,28 @@
 package org.turkisi.featureflags.spring.auction;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import org.turkisi.featureflags.spring.auction.rerun.RemarketingAuctionRerunFeatureDelegate;
-import org.turkisi.featureflags.spring.common.ConfigurableFeature;
-import org.turkisi.featureflags.spring.common.FeatureConfiguration;
+import org.turkisi.featureflags.spring.auction.rerun.RemarketingAuctionRerunFeature;
 import org.turkisi.featureflags.spring.domain.Auction;
 import org.turkisi.featureflags.spring.domain.CarLead;
 import org.turkisi.featureflags.spring.external.AuctionService;
 
 @Component
-class DefaultRemarketingAuctionIgnitionFeature implements RemarketingAuctionIgnitionFeature, ConfigurableFeature {
+@ConditionalOnProperty(value = "org.turkisi.features.auction.delegate", havingValue = "default")
+class DefaultRemarketingAuctionIgnitionFeature implements RemarketingAuctionIgnitionFeature {
 
     private final RemarketingAuctionIgnitionFeatureConfiguration configuration;
 
-    private final RemarketingAuctionRerunFeatureDelegate auctionRerunFeatureDelegate;
+    private final RemarketingAuctionRerunFeature auctionRerunFeature;
 
     private final AuctionService auctionService;
 
     protected DefaultRemarketingAuctionIgnitionFeature(RemarketingAuctionIgnitionFeatureConfiguration configuration,
-                                                       RemarketingAuctionRerunFeatureDelegate auctionRerunFeatureDelegate,
+                                                       RemarketingAuctionRerunFeature auctionRerunFeature,
                                                        AuctionService auctionService) {
         this.configuration = configuration;
-        this.auctionRerunFeatureDelegate = auctionRerunFeatureDelegate;
+        this.auctionRerunFeature = auctionRerunFeature;
         this.auctionService = auctionService;
-    }
-
-    @Override
-    public FeatureConfiguration getConfiguration() {
-        return configuration;
     }
 
     @Override
@@ -44,6 +39,6 @@ class DefaultRemarketingAuctionIgnitionFeature implements RemarketingAuctionIgni
 
     @Override
     public Auction rerunCar(CarLead car, int auctionTypeId) throws AuctionIgnitionFailException {
-        return auctionRerunFeatureDelegate.rerunCar(car, auctionTypeId);
+        return auctionRerunFeature.rerunCar(car, auctionTypeId);
     }
 }

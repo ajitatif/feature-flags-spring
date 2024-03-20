@@ -4,8 +4,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.turkisi.featureflags.spring.common.FeatureConfiguration;
 
-import java.util.Optional;
-
 @Component
 @ConfigurationProperties(prefix = "org.turkisi.features.auction.rerun")
 public class RemarketingAuctionRerunFeatureConfiguration implements FeatureConfiguration {

@@ -1,10 +1,10 @@
 org.turkisi.features:
   auction:
-    delegate: defaultRemarketingAuctionIgnitionFeature
+    delegate: default
     rerun:
-      delegate: disabledRemarketingAuctionRerunFeature
+      delegate: disabled
       rerun-limit:
-        delegate: defaultAuctionRerunLimitFeature
+        delegate: default
         limits:
           de: 3
           nl: 6

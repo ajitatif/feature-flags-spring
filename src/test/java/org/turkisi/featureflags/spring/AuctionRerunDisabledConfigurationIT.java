@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.turkisi.featureflags.spring.auction.AuctionIgnitionFailException;
-import org.turkisi.featureflags.spring.auction.RemarketingAuctionIgnitionFeatureDelegate;
+import org.turkisi.featureflags.spring.auction.RemarketingAuctionIgnitionFeature;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AuctionRerunDisabledConfigurationIT {
 
     @Autowired
-    private RemarketingAuctionIgnitionFeatureDelegate remarketingAuctionIgnitionFeature;
+    private RemarketingAuctionIgnitionFeature remarketingAuctionIgnitionFeature;
 
     @Test
     void shouldCheckoutWhenRerunDisabled() throws AuctionIgnitionFailException {
