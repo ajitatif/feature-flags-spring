@@ -13,14 +13,21 @@ there were other people working in the same code for a totally different feature
 
 Long story short, here's what I propose here:
 * Put the behaviors in the central of your code structure
-* Load all the behaviour selectively by using `@ConditionalOnProperty` annotation of Spring
-* Call other behaviors (sub-feature) from within a behavior (a feature)
+* ~~Load all the behaviour selectively by using `@ConditionalOnProperty` annotation of Spring~~
+* Load all the behaviour and execute selectively by creating a `Delegate` for each version of the feature 
+* Call other behaviors (child-feature or sibling-feature) from within a behavior (a feature) 
 * Use services only for external calls
 
 This way, if you need to change a behaviour, you only change the code related to that particular behaviour, nothing else
 
 Anyways, let me know if this helps; and order me a beer when you see me in person. Or rather, order me a beer even if 
 this doesn't help anything, I'm always up for a beer.
+
+## To-Do
+
+- [x] Handle A/B testing  
+- [ ] Reduce the amount of boilerplate code of creating delegates for each feature. Generify or create proxied on the fly
+- [ ] Implement feature usage metrics
 
 ## Licence
 

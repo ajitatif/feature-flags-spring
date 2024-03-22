@@ -1,10 +1,22 @@
 org.turkisi.features:
   auction:
-    delegate: default
+    experiment:
+      strategy: zero-check
+      versions:
+        - threshold: 0
+          delegate: defaultRemarketingAuctionIgnitionFeature
     rerun:
-      delegate: disabled
+      experiment:
+        strategy: zero-check
+        versions:
+          - threshold: 0
+            delegate: disabledRemarketingAuctionRerunFeature
       rerun-limit:
-        delegate: default
+        experiment:
+          strategy: zero-check
+          versions:
+            - threshold: 0
+              delegate: defaultRemarketingAuctionRerunLimitFeature
         limits:
           de: 3
           nl: 6

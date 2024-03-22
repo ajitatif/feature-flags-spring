@@ -1,12 +1,10 @@
 package org.turkisi.featureflags.spring.auction.rerun.limit;
 
 import jakarta.annotation.Nonnull;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Component;
+import org.turkisi.featureflags.spring.core.experiment.ExperimentedFeature;
 import org.turkisi.featureflags.spring.domain.CarLead;
 
-@Component
-@ConditionalOnProperty(value = "org.turkisi.features.auction.rerun.rerun-limit.delegate", havingValue = "default")
+@ExperimentedFeature
 class DefaultRemarketingAuctionRerunLimitFeature implements RemarketingAuctionRerunLimitFeature {
 
     private final RemarketingAuctionRerunLimitFeatureConfiguration configuration;

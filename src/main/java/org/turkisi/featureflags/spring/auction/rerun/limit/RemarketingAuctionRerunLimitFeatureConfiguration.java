@@ -2,15 +2,17 @@ package org.turkisi.featureflags.spring.auction.rerun.limit;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.turkisi.featureflags.spring.common.FeatureConfiguration;
+import org.turkisi.featureflags.spring.core.experiment.ExperimentConfiguration;
+import org.turkisi.featureflags.spring.core.experiment.ExperimentedFeatureConfiguration;
 
 import java.util.Map;
 
 @Component
 @ConfigurationProperties(prefix = "org.turkisi.features.auction.rerun.rerun-limit")
-public class RemarketingAuctionRerunLimitFeatureConfiguration implements FeatureConfiguration {
+public class RemarketingAuctionRerunLimitFeatureConfiguration implements ExperimentedFeatureConfiguration {
 
-    private String delegate;
+    private ExperimentConfiguration experiment;
+
     private Map<String, Integer> limits;
 
     public Map<String, Integer> getLimits() {
@@ -21,11 +23,11 @@ public class RemarketingAuctionRerunLimitFeatureConfiguration implements Feature
         this.limits = limits;
     }
 
-    public String getDelegate() {
-        return delegate;
+    public ExperimentConfiguration getExperiment() {
+        return experiment;
     }
 
-    public void setDelegate(String delegate) {
-        this.delegate = delegate;
+    public void setExperiment(ExperimentConfiguration experiment) {
+        this.experiment = experiment;
     }
 }

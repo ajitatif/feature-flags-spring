@@ -2,19 +2,20 @@ package org.turkisi.featureflags.spring.auction.rerun;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.turkisi.featureflags.spring.common.FeatureConfiguration;
+import org.turkisi.featureflags.spring.core.experiment.ExperimentConfiguration;
+import org.turkisi.featureflags.spring.core.experiment.ExperimentedFeatureConfiguration;
 
 @Component
 @ConfigurationProperties(prefix = "org.turkisi.features.auction.rerun")
-public class RemarketingAuctionRerunFeatureConfiguration implements FeatureConfiguration {
+public class RemarketingAuctionRerunFeatureConfiguration implements ExperimentedFeatureConfiguration {
 
-    private String delegate;
+    private ExperimentConfiguration experiment;
 
-    public String getDelegate() {
-        return delegate;
+    public ExperimentConfiguration getExperiment() {
+        return experiment;
     }
 
-    public void setDelegate(String delegate) {
-        this.delegate = delegate;
+    public void setExperiment(ExperimentConfiguration experiment) {
+        this.experiment = experiment;
     }
 }

@@ -1,10 +1,11 @@
 package org.turkisi.featureflags.spring.auction.rerun;
 
 import org.turkisi.featureflags.spring.auction.AuctionIgnitionFailException;
+import org.turkisi.featureflags.spring.core.Feature;
 import org.turkisi.featureflags.spring.domain.Auction;
 import org.turkisi.featureflags.spring.domain.CarLead;
 
-public interface RemarketingAuctionRerunFeature {
+public interface RemarketingAuctionRerunFeature extends Feature {
 
     /**
      * re-introduces a CarLead to an auction

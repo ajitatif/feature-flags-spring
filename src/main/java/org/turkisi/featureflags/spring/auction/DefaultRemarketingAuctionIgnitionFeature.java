@@ -1,26 +1,20 @@
 package org.turkisi.featureflags.spring.auction;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Component;
 import org.turkisi.featureflags.spring.auction.rerun.RemarketingAuctionRerunFeature;
+import org.turkisi.featureflags.spring.core.experiment.ExperimentedFeature;
 import org.turkisi.featureflags.spring.domain.Auction;
 import org.turkisi.featureflags.spring.domain.CarLead;
 import org.turkisi.featureflags.spring.external.AuctionService;
 
-@Component
-@ConditionalOnProperty(value = "org.turkisi.features.auction.delegate", havingValue = "default")
+@ExperimentedFeature
 class DefaultRemarketingAuctionIgnitionFeature implements RemarketingAuctionIgnitionFeature {
-
-    private final RemarketingAuctionIgnitionFeatureConfiguration configuration;
 
     private final RemarketingAuctionRerunFeature auctionRerunFeature;
 
     private final AuctionService auctionService;
 
-    protected DefaultRemarketingAuctionIgnitionFeature(RemarketingAuctionIgnitionFeatureConfiguration configuration,
-                                                       RemarketingAuctionRerunFeature auctionRerunFeature,
+    protected DefaultRemarketingAuctionIgnitionFeature(RemarketingAuctionRerunFeature auctionRerunFeature,
                                                        AuctionService auctionService) {
-        this.configuration = configuration;
         this.auctionRerunFeature = auctionRerunFeature;
         this.auctionService = auctionService;
     }
