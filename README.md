@@ -27,7 +27,7 @@ this doesn't help anything, I'm always up for a beer.
 
 - [x] Handle A/B testing  
 - [ ] Reduce the amount of boilerplate code of creating delegates for each feature. Generify or create proxied on the fly
-- [ ] Implement feature usage metrics
+- [x] Implement feature usage metrics
 
 ## Licence
 
