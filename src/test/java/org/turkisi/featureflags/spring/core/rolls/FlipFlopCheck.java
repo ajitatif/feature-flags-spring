@@ -6,7 +6,7 @@ import org.turkisi.featureflags.spring.core.experiment.ExperimentStrategyCheck;
 @Component("flip-flop")
 public class FlipFlopCheck implements ExperimentStrategyCheck {
 
-    boolean flip = true;
+    public boolean flip = true;
 
     @Override
     public double get(Object... params) {

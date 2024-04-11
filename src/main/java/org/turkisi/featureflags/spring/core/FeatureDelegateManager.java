@@ -25,9 +25,12 @@ public class FeatureDelegateManager implements ApplicationContextAware {
     // Map<FeatureInterfaceClass, Map<DelegateName, FeatureImplementation>>
     private final Map<Class<?>, Map<String, Object>> featureMapping = new HashMap<>();
     private ApplicationContext applicationContext;
+    
+    private final FeatureMetricsRepository metricsRepository;
 
-    public FeatureDelegateManager(Map<String, ExperimentStrategyCheck> strategyChecks) {
+    public FeatureDelegateManager(Map<String, ExperimentStrategyCheck> strategyChecks, FeatureMetricsRepository metricsRepository) {
         this.strategyChecks = strategyChecks;
+        this.metricsRepository = metricsRepository;
     }
 
     @Override
@@ -45,7 +48,9 @@ public class FeatureDelegateManager implements ApplicationContextAware {
         final RollResult result = getRollResult(configuration, params);
         final Optional<ExperimentVersion> version = result.version();
         if (version.isPresent()) {
-            return (T) featureMapping.get(featureBase).get(version.get().delegate());
+            final Object delegate = featureMapping.get(featureBase).get(version.get().delegate());
+            incrementDelegateUsage(delegate);
+            return (T) delegate;
         } else {
             throw new DelegationException(featureBase.getName(), result.roll());
         }
@@ -80,6 +85,12 @@ public class FeatureDelegateManager implements ApplicationContextAware {
         if (logger.isDebugEnabled()) {
             logger.debug("Feature mapping: {}", featureMapping);
         }
+    }
+
+    private void incrementDelegateUsage(Object delegate) {
+        final String className = delegate.getClass().getSimpleName();
+        String featureName = className.substring(className.lastIndexOf('.') + 1);
+        metricsRepository.incrementFeatureHits(featureName);
     }
 
     private record RollResult(double roll, Optional<ExperimentVersion> version) {
