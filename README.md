@@ -54,7 +54,7 @@ my-feature:
       - threshold: 0.5
         delegate: controlGroupMyFeature
       - threshold: 1
-        delegte: experimentGroupMyFeature
+        delegate: experimentGroupMyFeature
   some-other-config: false
   another-nested-config-for-my-feature:
     nested-config-one: 1
