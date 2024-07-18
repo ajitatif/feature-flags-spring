@@ -15,10 +15,34 @@ import org.turkisi.featureflags.spring.core.experiment.ExperimentedFeatureConfig
 import java.util.*;
 import java.util.function.Predicate;
 
+/**
+ * Component where the magic of delegation -> implementation happens. Each feature delegate (a class extending
+ * {@link FeatureDelegateBase} class) gets help from this delegate manager to pick the feature to run, according to the
+ * configuration defined in {@link org.turkisi.featureflags.spring.core.experiment.ExperimentConfiguration}
+ * <p>The implementation to run is determined using {@link ExperimentStrategyCheck}, and {@link ExperimentVersion}
+ * defined in the same configuration. FeatureDelegateManager is responsible for getting the check result from
+ * {@link ExperimentStrategyCheck} and pick the correct {@link Feature} implementation based on the range defined in the
+ * configuration.
+ * <p>The feature implementation to be picked is the first one within the calculated check range. e.g. for ranges</p>
+ * <pre>
+ *     0.0 -> Feature Implementation A
+ *     0.5 -> Feature Implementation B
+ * </pre>
+ * <p>A check of 0.49 will result in running {@code Feature Implementation A}, whereas a check of 0.5 will result in
+ * running {@code Feature Implementation B}</p>
+ * <p>FeatureDelegateManager is an {@link ApplicationContextAware} Spring bean and relies on reflection to detect the
+ * feature implementations. In order for a feature implementation to be picked up, it has to fulfill these conditions:
+ * <ul>
+ *  <li>Implement an interface which extends {@link Feature}</li>
+ *  <li>Marked {@link ExperimentedFeature} on the class-level</li>
+ *  <li>Configured range within the application configuration</li>
+ * </ul>
+ * </p>
+ */
 @Component
-public class FeatureDelegateManager implements ApplicationContextAware {
+public class FeatureDelegationManager implements ApplicationContextAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(FeatureDelegateManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(FeatureDelegationManager.class);
 
     private final Map<String, ExperimentStrategyCheck> strategyChecks;
 
@@ -28,7 +52,7 @@ public class FeatureDelegateManager implements ApplicationContextAware {
     
     private final FeatureMetricsRepository metricsRepository;
 
-    public FeatureDelegateManager(Map<String, ExperimentStrategyCheck> strategyChecks, FeatureMetricsRepository metricsRepository) {
+    public FeatureDelegationManager(Map<String, ExperimentStrategyCheck> strategyChecks, FeatureMetricsRepository metricsRepository) {
         this.strategyChecks = strategyChecks;
         this.metricsRepository = metricsRepository;
     }
@@ -38,6 +62,19 @@ public class FeatureDelegateManager implements ApplicationContextAware {
         this.applicationContext = applicationContext;
     }
 
+    /**
+     * Rolls the strategy check, and determines which implementation should run. Please refer to the class documentation
+     * on how the choice is made
+     * @param configuration The experimented feature configuration which contains strategy and ranges
+     * @param featureBase The base interface of the feature to run. Required because {@code FeatureDelegateManager}
+     *                    builds a {@code Map<String, ExperimentStrategyCheck>} to look up the implementations of the
+     *                    same feature
+     * @param params The parameters that {@code featureBase} requires to operate - These may or may not be used by the
+     *               strategy to decide
+     * @return The delegate picked according to {@code params} and {@code configuration} passed on
+     * @param <T> The feature base interface.
+     * @throws DelegationException When the roll did not result in picking any implementation
+     */
     @SuppressWarnings("unchecked")
     public <T> T getDelegateToRun(ExperimentedFeatureConfiguration configuration, Class<T> featureBase, Object... params) {
         if (featureMapping.isEmpty()) {

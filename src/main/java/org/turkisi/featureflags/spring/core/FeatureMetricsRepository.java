@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A basic repository to keep the number of hits per feature implementation
+ */
 @Component
 public class FeatureMetricsRepository {
 

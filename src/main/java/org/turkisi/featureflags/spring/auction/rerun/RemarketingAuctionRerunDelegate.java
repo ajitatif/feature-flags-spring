@@ -3,26 +3,24 @@ package org.turkisi.featureflags.spring.auction.rerun;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.turkisi.featureflags.spring.auction.AuctionIgnitionFailException;
-import org.turkisi.featureflags.spring.core.FeatureDelegateManager;
+import org.turkisi.featureflags.spring.core.FeatureDelegateBase;
+import org.turkisi.featureflags.spring.core.FeatureDelegationManager;
 import org.turkisi.featureflags.spring.domain.Auction;
 import org.turkisi.featureflags.spring.domain.CarLead;
 
 @Component
 @Primary
-public class RemarketingAuctionRerunDelegate implements RemarketingAuctionRerunFeature {
+public class RemarketingAuctionRerunDelegate extends FeatureDelegateBase<RemarketingAuctionRerunFeature>
+        implements RemarketingAuctionRerunFeature {
 
-    private final RemarketingAuctionRerunFeatureConfiguration configuration;
-    private final FeatureDelegateManager featureDelegateManager;
     public RemarketingAuctionRerunDelegate(RemarketingAuctionRerunFeatureConfiguration configuration,
-                                           FeatureDelegateManager featureDelegateManager) {
-        this.configuration = configuration;
-        this.featureDelegateManager = featureDelegateManager;
+                                           FeatureDelegationManager featureDelegationManager) {
+        super(RemarketingAuctionRerunFeature.class, configuration, featureDelegationManager);
     }
 
     @Override
     public Auction rerunCar(CarLead car, int auctionTypeId) throws AuctionIgnitionFailException {
-        return featureDelegateManager
-                .getDelegateToRun(configuration, RemarketingAuctionRerunFeature.class, car, auctionTypeId)
+        return getDelegateToRun(car, auctionTypeId)
                 .rerunCar(car, auctionTypeId);
     }
 }
