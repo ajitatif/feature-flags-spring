@@ -1,8 +1,8 @@
-package org.turkisi.featureflags.spring.auction;
+package org.turkisi.featureflags.spring.example.auction;
 
 import org.turkisi.featureflags.spring.core.Feature;
-import org.turkisi.featureflags.spring.domain.Auction;
-import org.turkisi.featureflags.spring.domain.CarLead;
+import org.turkisi.featureflags.spring.example.domain.Auction;
+import org.turkisi.featureflags.spring.example.domain.CarLead;
 
 public interface RemarketingAuctionIgnitionFeature extends Feature {
 

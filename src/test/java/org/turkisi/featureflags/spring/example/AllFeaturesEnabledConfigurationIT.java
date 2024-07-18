@@ -1,12 +1,13 @@
-package org.turkisi.featureflags.spring;
+package org.turkisi.featureflags.spring.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.turkisi.featureflags.spring.auction.AuctionIgnitionFailException;
-import org.turkisi.featureflags.spring.auction.RemarketingAuctionIgnitionFeature;
-import org.turkisi.featureflags.spring.auction.rerun.limit.CarAuctionRerunLimitExhaustedException;
+import org.turkisi.featureflags.spring.TestDataHelper;
+import org.turkisi.featureflags.spring.example.auction.AuctionIgnitionFailException;
+import org.turkisi.featureflags.spring.example.auction.RemarketingAuctionIgnitionFeature;
+import org.turkisi.featureflags.spring.example.auction.rerun.limit.CarAuctionRerunLimitExhaustedException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;

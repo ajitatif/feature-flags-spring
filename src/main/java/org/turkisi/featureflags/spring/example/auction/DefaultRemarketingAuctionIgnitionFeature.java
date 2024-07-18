@@ -1,10 +1,10 @@
-package org.turkisi.featureflags.spring.auction;
+package org.turkisi.featureflags.spring.example.auction;
 
-import org.turkisi.featureflags.spring.auction.rerun.RemarketingAuctionRerunFeature;
 import org.turkisi.featureflags.spring.core.experiment.ExperimentedFeature;
-import org.turkisi.featureflags.spring.domain.Auction;
-import org.turkisi.featureflags.spring.domain.CarLead;
-import org.turkisi.featureflags.spring.external.AuctionService;
+import org.turkisi.featureflags.spring.example.auction.rerun.RemarketingAuctionRerunFeature;
+import org.turkisi.featureflags.spring.example.domain.Auction;
+import org.turkisi.featureflags.spring.example.domain.CarLead;
+import org.turkisi.featureflags.spring.example.external.AuctionService;
 
 @ExperimentedFeature
 class DefaultRemarketingAuctionIgnitionFeature implements RemarketingAuctionIgnitionFeature {

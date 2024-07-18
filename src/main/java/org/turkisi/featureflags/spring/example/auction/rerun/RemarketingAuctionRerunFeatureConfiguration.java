@@ -1,4 +1,4 @@
-package org.turkisi.featureflags.spring.auction.rerun;
+package org.turkisi.featureflags.spring.example.auction.rerun;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

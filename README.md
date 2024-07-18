@@ -29,6 +29,17 @@ this doesn't help anything, I'm always up for a beer.
 - [ ] Reduce the amount of boilerplate code of creating delegates for each feature. Generify or create proxied on the fly
 - [x] Implement feature usage metrics
 
+## How to build and include in your project
+
+The source codes have example features for testing and demonstration purposes. However, these example classes are 
+excluded in the built JAR file. In order to build the JAR file:
+
+```bash
+./gradlew build
+```
+
+This will test and build the library jar. Then you can deploy it to your artifact repository
+
 ## How to use
 
 ### 1. Add your config

@@ -1,4 +1,4 @@
-package org.turkisi.featureflags.spring.domain;
+package org.turkisi.featureflags.spring.example.domain;
 
 import java.io.Serializable;
 

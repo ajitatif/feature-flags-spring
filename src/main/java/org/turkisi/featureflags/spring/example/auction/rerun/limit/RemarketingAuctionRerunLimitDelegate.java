@@ -1,11 +1,11 @@
-package org.turkisi.featureflags.spring.auction.rerun.limit;
+package org.turkisi.featureflags.spring.example.auction.rerun.limit;
 
 import jakarta.annotation.Nonnull;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.turkisi.featureflags.spring.core.FeatureDelegateBase;
 import org.turkisi.featureflags.spring.core.FeatureDelegationManager;
-import org.turkisi.featureflags.spring.domain.CarLead;
+import org.turkisi.featureflags.spring.example.domain.CarLead;
 
 @Component
 @Primary

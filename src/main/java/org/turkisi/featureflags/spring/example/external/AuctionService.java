@@ -1,8 +1,8 @@
-package org.turkisi.featureflags.spring.external;
+package org.turkisi.featureflags.spring.example.external;
 
 import org.springframework.stereotype.Component;
-import org.turkisi.featureflags.spring.domain.Auction;
-import org.turkisi.featureflags.spring.domain.CarLead;
+import org.turkisi.featureflags.spring.example.domain.Auction;
+import org.turkisi.featureflags.spring.example.domain.CarLead;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

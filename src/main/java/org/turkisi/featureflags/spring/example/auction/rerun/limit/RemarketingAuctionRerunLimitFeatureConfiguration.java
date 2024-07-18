@@ -1,4 +1,4 @@
-package org.turkisi.featureflags.spring.auction.rerun.limit;
+package org.turkisi.featureflags.spring.example.auction.rerun.limit;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

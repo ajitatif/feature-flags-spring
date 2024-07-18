@@ -1,4 +1,4 @@
-package org.turkisi.featureflags.spring.auction;
+package org.turkisi.featureflags.spring.example.auction;
 
 public class AuctionIgnitionFailException extends Exception {
 

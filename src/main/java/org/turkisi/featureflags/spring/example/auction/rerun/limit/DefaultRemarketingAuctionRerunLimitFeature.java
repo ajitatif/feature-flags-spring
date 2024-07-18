@@ -1,8 +1,8 @@
-package org.turkisi.featureflags.spring.auction.rerun.limit;
+package org.turkisi.featureflags.spring.example.auction.rerun.limit;
 
 import jakarta.annotation.Nonnull;
 import org.turkisi.featureflags.spring.core.experiment.ExperimentedFeature;
-import org.turkisi.featureflags.spring.domain.CarLead;
+import org.turkisi.featureflags.spring.example.domain.CarLead;
 
 @ExperimentedFeature
 class DefaultRemarketingAuctionRerunLimitFeature implements RemarketingAuctionRerunLimitFeature {
