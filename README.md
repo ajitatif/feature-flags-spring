@@ -38,6 +38,12 @@ excluded in the built JAR file. In order to build the JAR file:
 ./gradlew build
 ```
 
+or, to publish to your local M2 repository:
+
+```bash
+./gradlew publishToMavenLocal
+```
+
 This will test and build the library jar. Then you can deploy it to your artifact repository
 
 ## How to use

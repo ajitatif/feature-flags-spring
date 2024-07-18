@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
     id 'org.springframework.boot' version '3.2.3'
     id 'io.spring.dependency-management' version '1.1.4'
 }
@@ -34,6 +35,17 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
@@ -44,4 +56,8 @@ tasks.named('bootJar') {
 
 tasks.named('build') {
     dependsOn 'jar'
+}
+
+tasks.named('publishToMavenLocal') {
+    dependsOn 'build'
 }
