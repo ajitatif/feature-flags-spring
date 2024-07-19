@@ -32,12 +32,12 @@ import java.util.function.Predicate;
  * running {@code Feature Implementation B}</p>
  * <p>FeatureDelegateManager is an {@link ApplicationContextAware} Spring bean and relies on reflection to detect the
  * feature implementations. In order for a feature implementation to be picked up, it has to fulfill these conditions:
+ * </p>
  * <ul>
  *  <li>Implement an interface which extends {@link Feature}</li>
  *  <li>Marked {@link ExperimentedFeature} on the class-level</li>
  *  <li>Configured range within the application configuration</li>
  * </ul>
- * </p>
  */
 @Component
 public class FeatureDelegationManager implements ApplicationContextAware {
