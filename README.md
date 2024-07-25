@@ -3,8 +3,7 @@
 Could this be a new way to design software? Rather than relying on multi-tier architecture, is it actually more 
 maintainable to design software on features?
 
-This small project uses something similar to the delegation pattern, without any coded delegates. Thanks to Spring IoC, 
-we are able to selectively initialize components based on configuration properties. This, plus designing the software 
+This small project uses something similar to the delegation pattern. This, plus designing the software 
 based on behaviour, rather than object hierarchy can enable us to make use of open-closed principle in a better way.  
 
 How many times did we need to change model, view and controller at the same time for a small addition to a feature? 
@@ -12,7 +11,7 @@ And how much time did it take for us to code these changes? How many times did w
 there were other people working in the same code for a totally different feature?  
 
 Long story short, here's what I propose here:
-* Put the behaviors in the central of your code structure
+* Put the behaviors in the focus of your code structure
 * ~~Load all the behaviour selectively by using `@ConditionalOnProperty` annotation of Spring~~
 * Load all the behaviour and execute selectively by creating a `Delegate` for each version of the feature 
 * Call other behaviors (child-feature or sibling-feature) from within a behavior (a feature) 
@@ -26,8 +25,10 @@ this doesn't help anything, I'm always up for a beer.
 ## To-Do
 
 - [x] Handle A/B testing  
-- [ ] Reduce the amount of boilerplate code of creating delegates for each feature. Generify or create proxied on the fly
 - [x] Implement feature usage metrics
+- [ ] Make the feature experimentation abstract, and implement config file based experimentation
+- [ ] Implement database based experimentation, and invent an easy way of using one or the other
+- [ ] Reduce the amount of boilerplate code of creating delegates for each feature. Generify or create proxied on the fly
 
 ## How to build and include in your project
 
@@ -71,7 +72,7 @@ my-feature:
 ### 2. Add boilerplate code
 
 Sorry, but this is required for the time being. You will need:
-1. Feature interface, defining the feature contract - `extends ExperimentedFeature`
+1. Feature interface, defining the feature contract - `extends Feature`
 2. Feature configuration class, `implements ExperimentedFeatureConfiguration`
 3. Disabled feature implementation, `implements NewFeatureInterface`
 4. Enabled feature implementation, `implements NewFeatureInterface`
@@ -79,7 +80,7 @@ Sorry, but this is required for the time being. You will need:
 
 #### Feature interface
 ```java
-public interface NewFeature extends ExperimentedFeature {
+public interface NewFeature extends Feature {
     void publicMethod(Long param);
 }
 ```
@@ -98,7 +99,7 @@ public class NewFeatureConfiguration implements ExperimentedFeatureConfiguration
 
     @Override
     public ExperimentConfiguration getExperiment() {
-        return null;
+        return experiment;
     }
 ...
 ```
